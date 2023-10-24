@@ -7,5 +7,6 @@ namespace AlcadaDoAluno.Src.model
 {
     public class DataBase
     {
+        
     }
 }
