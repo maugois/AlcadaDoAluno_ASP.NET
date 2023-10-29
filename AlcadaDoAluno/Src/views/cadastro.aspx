@@ -29,43 +29,43 @@
                     <div class="mb-4">
                         <div class="mb-3">
                             <label for="txtRa" class="form-label">RA:</label>
-                            <input type="text" id="txtRa" name="" class="form-control" placeholder="Digite seu RA...">
+                            <asp:TextBox ID="txtRa" runat="server" class="form-control" placeholder="Digite seu RA..."></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtNome" class="form-label">Nome completo:</label>
-                            <input type="text" id="txtNome" name="" class="form-control" placeholder="Digite seu nome completo...">
+                            <asp:TextBox ID="txtNome" runat="server" class="form-control" placeholder="Digite seu nome completo..."></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtRg" class="form-label">RG:</label>
-                            <input type="text" id="txtRg" name="" class="form-control" placeholder="Digite seu RG...">
+                            <asp:TextBox ID="txtRg" runat="server" class="form-control" placeholder="Digite seu RG..."></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtCpf" class="form-label">CPF:</label>
-                            <input type="text" id="txtCpf" name="" class="form-control" placeholder="Digite seu CPF...">
+                            <asp:TextBox ID="txtCpf" runat="server" class="form-control" placeholder="Digite seu CPF..."></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtDataNasc" class="form-label">Data de nascimento:</label>
-                            <input type="date" id="txtDataNasc" name="" class="form-control">
+                            <asp:TextBox ID="txtDataNasc" Type="date" runat="server" class="form-control"></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtEmail" class="form-label">E-mail:</label>
-                            <input type="email" id="txtEmail" name="" class="form-control" placeholder="Digite seu e-mail...">
+                            <asp:TextBox ID="txtEmail" runat="server" class="form-control" placeholder="Digite seu e-mail..."></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtSenha" class="form-label">Senha:</label>
-                            <input type="password" id="txtSenha" name="" class="form-control" placeholder="Digite sua senha...">
+                            <asp:TextBox ID="txtSenha" runat="server" class="form-control" placeholder="Digite sua senha..."></asp:TextBox>
                         </div>
                     </div>
 
                     <div class="d-flex justify-content-between">
                         <a href="./index.aspx" class="btn btn-danger">Voltar</a>
-                        <input type="submit" value="Cadastrar" class="btn btn-primary">
+                        <asp:Button ID="btnEnviar" runat="server" Text="Cadastrar" class="btn btn-primary" OnClick="btnEnviar_Click" />
                     </div>
                 </form>
             </div>
