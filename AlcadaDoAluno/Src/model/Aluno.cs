@@ -68,7 +68,7 @@ namespace AlcadaDoAluno.Src.model
             {
                 cmd = DataBase.Abrir();
 
-                cmd.CommandText = "insert aluno (ra, nome, rg, cpf, dataNasc, email, senha) " +
+                cmd.CommandText = "insert alunos (ra, nome, rg, cpf, dataNasc, email, senha) " +
                    "values(@nome, @rg, @cpf, @dataNasc, @email, @senha)";
 
                 cmd.Parameters.Add("@ra", MySqlDbType.VarChar).Value = Ra;
@@ -91,7 +91,10 @@ namespace AlcadaDoAluno.Src.model
             {
                 // Mostra o erro
             }
-
+            finally
+            {
+                DataBase.Fechar(cmd);
+            }
 
             return teste;
         }
@@ -100,7 +103,7 @@ namespace AlcadaDoAluno.Src.model
         {
             var cmd = DataBase.Abrir();
 
-            cmd.CommandText = "update aluno set " +
+            cmd.CommandText = "update alunos set " +
                 "ra = @ra, nome = @nome, rg = @rg, cpf = @cpf, dataNasc = @dataNasc, email = @email, senha = @senha where id = " + Id;
 
             cmd.Parameters.Add("@ra", MySqlDbType.VarChar).Value = Ra;
