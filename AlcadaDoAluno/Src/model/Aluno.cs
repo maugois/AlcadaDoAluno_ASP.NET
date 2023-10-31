@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
+using MySql.Data;
 using MySqlX.XDevAPI;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -69,7 +70,7 @@ namespace AlcadaDoAluno.Src.model
                 cmd = DataBase.Abrir();
 
                 cmd.CommandText = "insert alunos (ra, nome, rg, cpf, dataNasc, email, senha) " +
-                   "values(@nome, @rg, @cpf, @dataNasc, @email, @senha)";
+                   "values(@ra, @nome, @rg, @cpf, @dataNasc, @email, @senha)";
 
                 cmd.Parameters.Add("@ra", MySqlDbType.VarChar).Value = Ra;
                 cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = Nome;
@@ -83,6 +84,7 @@ namespace AlcadaDoAluno.Src.model
                 {
                     cmd.CommandText = "select @@identity";
                     Id = Convert.ToInt32(cmd.ExecuteScalar());
+                    DataBase.Fechar(cmd);
 
                     teste = true;
                 }
@@ -90,10 +92,6 @@ namespace AlcadaDoAluno.Src.model
             catch (Exception)
             {
                 // Mostra o erro
-            }
-            finally
-            {
-                DataBase.Fechar(cmd);
             }
 
             return teste;

@@ -12,7 +12,7 @@ namespace AlcadaDoAluno.Src.views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void btnEnviar_Click(object sender, EventArgs e)
@@ -29,11 +29,13 @@ namespace AlcadaDoAluno.Src.views
 
             if (aluno.Inserir())
             {
-                Response.Redirect("./index.aspx");
+                mensagemStatusInserirCadastro.ForeColor = System.Drawing.Color.Green;
+                mensagemStatusInserirCadastro.Text = "Cadastro efetuado com sucesso!";
             }
             else
             {
-                Response.Redirect("./cadastro.aspx");
+                mensagemStatusInserirCadastro.ForeColor = System.Drawing.Color.Red;
+                mensagemStatusInserirCadastro.Text = "Erro no cadastro! Tente novamente.";
             }
         }
     }

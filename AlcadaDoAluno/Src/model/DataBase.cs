@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
+using MySql.Data;
 
 namespace AlcadaDoAluno.Src.model
 {
@@ -14,7 +15,7 @@ namespace AlcadaDoAluno.Src.model
         // Metódos
         public static MySqlCommand Abrir()
         {
-            strConn = @"server=127.0.0.1;database=alcadaAluno;port=3307;user id=root;password=usbw";
+            strConn = @"server=127.0.0.1;database=alcadaaluno;port=3306;user id=root;password=";
             MySqlCommand cmd = new MySqlCommand();
 
             // Tentar abrir - Fluxos alternativos (Especificação de Caso de Uso DOC)

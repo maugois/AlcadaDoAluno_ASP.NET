@@ -24,42 +24,44 @@
                 <p class="text-center fw-light">LOGO</p>
             </div>
 
+            <asp:Label ID="mensagemStatusInserirCadastro" runat="server" Text="" ForeColor="Red"></asp:Label>
+
             <div>
                 <form action="" id="form1" runat="server" class="row">
                     <div class="mb-4">
                         <div class="mb-3">
                             <label for="txtRa" class="form-label">RA:</label>
-                            <asp:TextBox ID="txtRa" runat="server" class="form-control" placeholder="Digite seu RA..."></asp:TextBox>
+                            <asp:TextBox ID="txtRa" Type="text" runat="server" class="form-control" placeholder="Digite seu RA..." required MaxLength="20"></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtNome" class="form-label">Nome completo:</label>
-                            <asp:TextBox ID="txtNome" runat="server" class="form-control" placeholder="Digite seu nome completo..."></asp:TextBox>
+                            <asp:TextBox ID="txtNome" Type="text" runat="server" class="form-control" placeholder="Digite seu nome completo..." required></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtRg" class="form-label">RG:</label>
-                            <asp:TextBox ID="txtRg" runat="server" class="form-control" placeholder="Digite seu RG..."></asp:TextBox>
+                            <asp:TextBox ID="txtRg" Type="text" runat="server" class="form-control" placeholder="Digite seu RG..." required MaxLength="12"></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtCpf" class="form-label">CPF:</label>
-                            <asp:TextBox ID="txtCpf" runat="server" class="form-control" placeholder="Digite seu CPF..."></asp:TextBox>
+                            <asp:TextBox ID="txtCpf" Type="text" runat="server" class="form-control" placeholder="Digite seu CPF..." required MaxLength="14"></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtDataNasc" class="form-label">Data de nascimento:</label>
-                            <asp:TextBox ID="txtDataNasc" Type="date" runat="server" class="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtDataNasc" Type="date" runat="server" class="form-control" required></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtEmail" class="form-label">E-mail:</label>
-                            <asp:TextBox ID="txtEmail" runat="server" class="form-control" placeholder="Digite seu e-mail..."></asp:TextBox>
+                            <asp:TextBox ID="txtEmail" Type="email" runat="server" class="form-control" placeholder="Digite seu e-mail..." required></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtSenha" class="form-label">Senha:</label>
-                            <asp:TextBox ID="txtSenha" runat="server" class="form-control" placeholder="Digite sua senha..."></asp:TextBox>
+                            <asp:TextBox ID="txtSenha" Type="password" runat="server" class="form-control" placeholder="Digite sua senha..." required></asp:TextBox>
                         </div>
                     </div>
 
