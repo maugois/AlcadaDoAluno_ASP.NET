@@ -27,7 +27,7 @@
             <asp:Label ID="mensagemStatusInserirCadastro" runat="server" Text="" ForeColor="Red"></asp:Label>
 
             <div>
-                <form action="" id="form1" runat="server" class="row">
+                <form id="form1" runat="server" class="row">
                     <div class="mb-4">
                         <div class="mb-3">
                             <label for="txtRa" class="form-label">RA:</label>
