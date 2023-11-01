@@ -52,7 +52,7 @@
     </main>
 </body>
 <!-- Jquery -->
-<script type="text/javascript" src="../../Assets/js/jquery-3.7.1.js"></script>
+<script type="text/javascript" src="../../Scripts/jquery-3.4.1.js"></script>
 <!-- Bootstrap javaScript -->
 <script type="text/javascript" src="../../Assets/js/bootstrap.js"></script>
 </html>

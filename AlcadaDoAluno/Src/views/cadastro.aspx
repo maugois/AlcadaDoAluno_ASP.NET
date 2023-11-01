@@ -79,7 +79,15 @@
     </main>
 </body>
 <!-- Jquery -->
-<script type="text/javascript" src="../../Assets/js/jquery-3.7.1.js"></script>
+<script type="text/javascript" src="../../Scripts/jquery-3.4.1.js"></script>
 <!-- Bootstrap javaScript -->
 <script type="text/javascript" src="../../Assets/js/bootstrap.js"></script>
+<!-- Jquery InputMask -->
+<script type="text/javascript" src="../../Scripts/inputmask/jquery.inputmask.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#txtCpf").inputmask('999.999.999-99');
+        $("#txtRg").inputmask('99.999.999-9');
+    });
+</script>
 </html>

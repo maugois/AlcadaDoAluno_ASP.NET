@@ -127,6 +127,11 @@ namespace AlcadaDoAluno.Src.model
 
         }
 
+        public void ObterPorId()
+        {
+
+        }
+
         public void DeletarConta()
         {
 
