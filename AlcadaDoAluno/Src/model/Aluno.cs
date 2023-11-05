@@ -227,7 +227,7 @@ namespace AlcadaDoAluno.Src.model
             RemoverSessao();
         }
 
-        public bool DeletarConta()
+        public bool DeletarConta(int _id)
         {
             MySqlCommand cmd = null;
 
@@ -235,9 +235,9 @@ namespace AlcadaDoAluno.Src.model
             {
                 cmd = DataBase.Abrir();
 
-                cmd.CommandText = "delete from alunos where ra = @ra";
+                cmd.CommandText = "delete from alunos where id = @id";
 
-                cmd.Parameters.Add("@ra", MySqlDbType.VarChar).Value = Ra;
+                cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = _id;
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {

@@ -1,4 +1,6 @@
 ﻿using AlcadaDoAluno.Src.model;
+using Microsoft.Ajax.Utilities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +37,9 @@ namespace AlcadaDoAluno.Src.views
         protected void btnDeletar_Click(object sender, EventArgs e)
         {
             Aluno aluno = new Aluno();
-            aluno.Ra = HttpContext.Current.Session["Login"].ToString();
-            aluno.DeletarConta();
-            
+            var id = JsonConvert.DeserializeObject<Aluno>((string)HttpContext.Current.Session["Login"]);
+
+            aluno.DeletarConta(id.Id);
 
             if (!aluno.BuscarSessao())
             {
