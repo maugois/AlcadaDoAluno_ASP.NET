@@ -25,22 +25,22 @@
             </div>
 
             <div>
-                <form action="" id="form1" runat="server" class="row">
+                <form id="form1" runat="server" class="row">
                     <div class="mb-4">
                         <div class="mb-3">
                             <label for="txtRa" class="form-label">RA:</label>
-                            <input type="text" id="txtRa" name="" class="form-control" placeholder="Digite seu RA...">
+                            <asp:TextBox ID="txtRa" runat="server" Type="text" class="form-control" placeholder="Digite seu RA..." required></asp:TextBox>
                         </div>
     
                         <div class="mb-3">
                             <label for="txtSenha" class="form-label">Senha:</label>
-                            <input type="password" id="txtSenha" name="" class="form-control" placeholder="Digite sua senha...">
+                            <asp:TextBox ID="txtSenha" runat="server" Type="password" class="form-control" placeholder="Digite sua senha..." required></asp:TextBox>
                         </div>
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <a href="./index.aspx" class="btn btn-danger">Voltar</a>
-                        <input type="submit" value="Confirmar" class="btn btn-primary">
+                        <asp:HyperLink ID="linkIndex" href="./index.aspx" class="btn btn-danger" runat="server">Voltar</asp:HyperLink>
+                        <asp:Button ID="btnEnviar" class="btn btn-primary" runat="server" Text="Confirmar" OnClick="btnEnviar_Click" />
                     </div>
                 </form>
             </div>

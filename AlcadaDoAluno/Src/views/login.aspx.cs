@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlcadaDoAluno.Src.model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,27 @@ namespace AlcadaDoAluno.Src.views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Aluno aluno = new Aluno();
 
+            if (aluno.BuscarSessao())
+            {
+                Response.Redirect("indexCli.aspx");
+            }
+        }
+
+        protected void btnEnviar_Click(object sender, EventArgs e)
+        {
+            Aluno aluno = new Aluno();
+
+            aluno.Ra = txtRa.Text;
+            aluno.Senha = txtSenha.Text;
+
+            aluno.Login();
+
+            if (aluno.BuscarSessao())
+            {
+                Response.Redirect("indexCli.aspx");
+            }
         }
     }
 }

@@ -6,6 +6,8 @@ using MySql.Data.MySqlClient;
 using MySql.Data;
 using MySqlX.XDevAPI;
 using static System.Net.Mime.MediaTypeNames;
+using Newtonsoft.Json;
+using System.Drawing;
 
 namespace AlcadaDoAluno.Src.model
 {
@@ -46,6 +48,17 @@ namespace AlcadaDoAluno.Src.model
             DataNasc = dataNasc;
             Email = email;
             Senha = senha;
+        }
+
+        public Aluno(int id, string ra, string nome, string rg, string cpf, string dataNasc, string email)
+        {
+            Id = id;
+            Ra = ra;
+            Nome = nome;
+            Rg = rg;
+            Cpf = cpf;
+            DataNasc = dataNasc;
+            Email = email;
         }
 
         public Aluno(string ra, string nome, string rg, string cpf, string dataNasc, string email, string senha)
@@ -99,6 +112,7 @@ namespace AlcadaDoAluno.Src.model
 
         public void Atualizar()
         {
+            /*
             var cmd = DataBase.Abrir();
 
             cmd.CommandText = "update alunos set " +
@@ -115,26 +129,130 @@ namespace AlcadaDoAluno.Src.model
             cmd.ExecuteNonQuery();
 
             DataBase.Fechar(cmd);
+
+            <? php
+                if (!isset($_SESSION['login_usuario']))
+                {
+                    // Se não existir, redirecionamos a sessão por segurança
+                    header('location: login.php');
+                    exit;
+                }
+
+                $nome_da_sessao = session_name();
+                if (!isset($_SESSION['nome_da_sessao']) OR($_SESSION['nome_da_sessao'] != $nome_da_sessao)) {
+                    session_destroy();
+                    header('location: login.php');
+                    exit;
+                }
+            ?>
+            */
+        }
+
+        public Aluno ObterPorRa(string _ra, string _senha)
+        {
+            MySqlCommand cmd = null;
+
+            try
+            {
+                cmd = DataBase.Abrir();
+
+                cmd.CommandText = "select * from alunos where ra = @ra and senha = @senha";
+
+                cmd.Parameters.Add("@ra", MySqlDbType.VarChar).Value = _ra;
+                cmd.Parameters.Add("@senha", MySqlDbType.VarChar).Value = _senha;
+
+                var dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    Aluno aluno = new Aluno(
+                        dr.GetInt32(0),
+                        dr.GetString(1),
+                        dr.GetString(2),
+                        dr.GetString(3),
+                        dr.GetString(4),
+                        dr.GetString(5),
+                        dr.GetString(6)
+                    );
+
+                    dr.Close();
+                    DataBase.Fechar(cmd);
+
+                    return aluno;
+                }
+            }
+            catch (Exception)
+            {
+                // Mostra o erro
+            }
+
+            return null;
+        }
+
+        public void IniciarSessao(Aluno _aluno)
+        {
+            string valor = JsonConvert.SerializeObject(_aluno);
+            HttpContext.Current.Session["Login"] = valor;
+        }
+
+        public bool BuscarSessao()
+        {
+            var valor = HttpContext.Current.Session["Login"];
+            
+            if (valor != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void RemoverSessao()
+        {
+            HttpContext.Current.Session.Remove("Login");
         }
 
         public void Login()
         {
+            var aluno = ObterPorRa(Ra, Senha);
 
+            if (aluno != null)
+            {
+                IniciarSessao(aluno);
+            }
         }
 
         public void Logout()
         {
-
+            RemoverSessao();
         }
 
-        public void ObterPorId()
+        public bool DeletarConta()
         {
+            MySqlCommand cmd = null;
 
-        }
+            try
+            {
+                cmd = DataBase.Abrir();
 
-        public void DeletarConta()
-        {
+                cmd.CommandText = "delete from alunos where ra = @ra";
 
+                cmd.Parameters.Add("@ra", MySqlDbType.VarChar).Value = Ra;
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    RemoverSessao();
+                    DataBase.Fechar(cmd);
+
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                // Mostra o erro
+            }
+
+            return false;
         }
     }
 }

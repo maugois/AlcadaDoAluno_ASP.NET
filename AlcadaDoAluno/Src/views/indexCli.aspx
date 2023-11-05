@@ -32,9 +32,9 @@
             </div>
 
             <div class="d-flex flex-column gap-3 m-4">
-                <asp:LinkButton ID="LinkButton1" runat="server" href="./dadosPessoais.aspx" class="btn btn-primary">Dados Pessoais</asp:LinkButton>
-                <asp:LinkButton ID="LinkButton2" runat="server" href="" class="btn btn-secondary">Sair</asp:LinkButton>
-                <asp:LinkButton ID="LinkButton3" runat="server" href="" class="btn btn-danger">Deletar Conta</asp:LinkButton>
+                <asp:LinkButton ID="linkDadosPessoais" runat="server" href="./dadosPessoais.aspx" class="btn btn-primary">Dados Pessoais</asp:LinkButton>
+                <asp:Button ID="btnSair" runat="server" class="btn btn-secondary" Text="Sair" OnClick="btnSair_Click"/>
+                <asp:Button ID="btnDeletar" runat="server" class="btn btn-danger" Text="Deletar Conta" OnClick="btnDeletar_Click"/>
             </div>
         </section>
 
