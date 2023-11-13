@@ -8,6 +8,7 @@ using MySqlX.XDevAPI;
 using static System.Net.Mime.MediaTypeNames;
 using Newtonsoft.Json;
 using System.Drawing;
+using AlcadaDoAluno.Src.views;
 
 namespace AlcadaDoAluno.Src.model
 {
@@ -110,26 +111,118 @@ namespace AlcadaDoAluno.Src.model
             return teste;
         }
 
-        public void Atualizar()
+        public bool Atualizar(string atualiza)
         {
-            /*
-            var cmd = DataBase.Abrir();
+            MySqlCommand cmd = null;
+            bool teste = false;
+            string[] dadoAtualiza = new string[2];
 
-            cmd.CommandText = "update alunos set " +
-                "ra = @ra, nome = @nome, rg = @rg, cpf = @cpf, dataNasc = @dataNasc, email = @email, senha = @senha where id = " + Id;
+            switch (atualiza)
+            {
+                case "ra":
+                    dadoAtualiza[0] = "ra";
+                    dadoAtualiza[1] = Ra;
+                    break;
 
-            cmd.Parameters.Add("@ra", MySqlDbType.VarChar).Value = Ra;
-            cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = Nome;
-            cmd.Parameters.Add("@rg", MySqlDbType.VarChar).Value = Rg;
-            cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = Cpf;
-            cmd.Parameters.Add("@dataNasc", MySqlDbType.Date).Value = DataNasc;
-            cmd.Parameters.Add("@email", MySqlDbType.VarChar).Value = Email;
-            cmd.Parameters.Add("@senha", MySqlDbType.VarChar).Value = Senha;
+                case "nome":
+                    dadoAtualiza[0] = "nome";
+                    dadoAtualiza[1] = Nome;
+                    break;
 
-            cmd.ExecuteNonQuery();
+                case "rg":
+                    dadoAtualiza[0] = "rg";
+                    dadoAtualiza[1] = Rg;
+                    break;
 
-            DataBase.Fechar(cmd);
-            */
+                case "cpf":
+                    dadoAtualiza[0] = "cpf";
+                    dadoAtualiza[1] = Cpf;
+                    break;
+
+                case "dataNasc":
+                    dadoAtualiza[0] = "dataNasc";
+                    dadoAtualiza[1] = dataNasc;
+                    break;
+
+                case "email":
+                    dadoAtualiza[0] = "email";
+                    dadoAtualiza[1] = Email;
+                    break;
+                case "senha":
+                    dadoAtualiza[0] = "senha";
+                    dadoAtualiza[1] = Senha;
+                    break;
+
+                default:
+                    break;
+            }
+
+            try
+            {
+                cmd = DataBase.Abrir();
+
+                cmd.CommandText = "update alunos set " +
+                                dadoAtualiza[0] + " = @" + dadoAtualiza[0] + " where id = " + Id;
+
+                cmd.Parameters.Add("@" + dadoAtualiza[0], MySqlDbType.VarChar).Value = dadoAtualiza[1];
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    Aluno aluno = new Aluno();
+                    aluno = ObterPorId(Id);
+                    HttpContext.Current.Session["Login"] = JsonConvert.SerializeObject(aluno);
+
+                    DataBase.Fechar(cmd);
+
+                    teste = true;
+                }
+            }
+            catch (Exception)
+            {
+                // Mostra o erro
+            }
+
+            return teste;
+        }
+
+        public Aluno ObterPorId(int _id)
+        {
+            MySqlCommand cmd = null;
+
+            try
+            {
+                cmd = DataBase.Abrir();
+
+                cmd.CommandText = "select * from alunos where id = @id";
+
+                cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = _id;
+
+                var dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    Aluno aluno = new Aluno(
+                        dr.GetInt32(0),
+                        dr.GetString(1),
+                        dr.GetString(2),
+                        dr.GetString(3),
+                        dr.GetString(4),
+                        dr.GetString(5),
+                        dr.GetString(6)
+                    );
+
+                    dr.Close();
+                    DataBase.Fechar(cmd);
+
+                    return aluno;
+                }
+            }
+            catch (Exception)
+            {
+                // Mostra o erro
+            }
+
+            return null;
         }
 
         public Aluno ObterPorRa(string _ra, string _senha)
@@ -182,12 +275,12 @@ namespace AlcadaDoAluno.Src.model
         public bool BuscarSessao()
         {
             var valor = HttpContext.Current.Session["Login"];
-            
+
             if (valor != null)
             {
                 return true;
             }
-
+            
             return false;
         }
 
@@ -196,14 +289,17 @@ namespace AlcadaDoAluno.Src.model
             HttpContext.Current.Session.Remove("Login");
         }
 
-        public void Login()
+        public bool Login()
         {
             var aluno = ObterPorRa(Ra, Senha);
 
             if (aluno != null)
             {
                 IniciarSessao(aluno);
+                return true;
             }
+
+            return false;
         }
 
         public void Logout()

@@ -27,7 +27,11 @@ namespace AlcadaDoAluno.Src.views
             aluno.Ra = txtRa.Text;
             aluno.Senha = txtSenha.Text;
 
-            aluno.Login();
+            if (aluno.Login() == false)
+            {
+                labMensagem.Text = "Erro! Não foi possível efetutar Login (RA ou Senha incorreta).";
+                labMensagem.ForeColor = System.Drawing.Color.Red;
+            }
 
             if (aluno.BuscarSessao())
             {

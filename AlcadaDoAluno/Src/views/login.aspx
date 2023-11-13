@@ -23,9 +23,11 @@
             <div class="bg-body-secondary rounded-circle p-5">
                 <p class="text-center fw-light">LOGO</p>
             </div>
-
+            
+            <asp:Label ID="labMensagem" runat="server"></asp:Label>
+            
             <div>
-                <form id="form1" runat="server" class="row">
+                <form id="formLogin" runat="server" class="row">
                     <div class="mb-4">
                         <div class="mb-3">
                             <label for="txtRa" class="form-label">RA:</label>

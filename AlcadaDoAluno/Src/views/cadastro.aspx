@@ -27,7 +27,7 @@
             <asp:Label ID="mensagemStatusInserirCadastro" runat="server" Text="" ForeColor="Red"></asp:Label>
 
             <div>
-                <form id="form1" runat="server" class="row">
+                <form id="formCadastro" runat="server" class="row">
                     <div class="mb-4">
                         <div class="mb-3">
                             <label for="txtRa" class="form-label">RA:</label>
@@ -41,12 +41,12 @@
 
                         <div class="mb-3">
                             <label for="txtRg" class="form-label">RG:</label>
-                            <asp:TextBox ID="txtRg" Type="text" runat="server" class="form-control" placeholder="Digite seu RG..." required MaxLength="12"></asp:TextBox>
+                            <asp:TextBox ID="txtRg" Type="text" runat="server" class="form-control" placeholder="Digite seu RG..." MaxLength="12" required></asp:TextBox>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtCpf" class="form-label">CPF:</label>
-                            <asp:TextBox ID="txtCpf" Type="text" runat="server" class="form-control" placeholder="Digite seu CPF..." required MaxLength="14"></asp:TextBox>
+                            <asp:TextBox ID="txtCpf" Type="text" runat="server" class="form-control" placeholder="Digite seu CPF..." MaxLength="14" required></asp:TextBox>
                         </div>
 
                         <div class="mb-3">

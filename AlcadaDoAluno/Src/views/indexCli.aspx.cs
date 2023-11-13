@@ -20,6 +20,8 @@ namespace AlcadaDoAluno.Src.views
             {
                 Response.Redirect("index.aspx");
             }
+
+            labNomeDoUsario.Text = JsonConvert.DeserializeObject<Aluno>((string)HttpContext.Current.Session["Login"]).Nome;
         }
 
         protected void btnSair_Click(object sender, EventArgs e)
